@@ -1,0 +1,8 @@
+{
+  "short_name": "NASDAQ",
+  "name": "NASDAQ Stock Market",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
