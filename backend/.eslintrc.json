@@ -4,13 +4,15 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["prettier", "airbnb-base"],
+  "extends": ["prettier", "airbnb-base", "airbnb-typescript/base"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": "latest"
+    "ecmaVersion": "latest",
+    "project": "backend/tsconfig.json"
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
+    "linebreak-style": ["error", "windows"],
     "prettier/prettier": [
       "error",
       {
@@ -18,7 +20,8 @@
         "singleQuote": true,
         "printWidth": 80,
         "tabWidth": 2,
-        "arrowParens": "always"
+        "arrowParens": "always",
+        "endOfLine": "auto"
       }
     ]
   }
