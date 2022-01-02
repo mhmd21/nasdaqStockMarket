@@ -8,7 +8,7 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
-    "project": "backend/tsconfig.json"
+    "project": "tsconfig.json"
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
@@ -16,7 +16,7 @@
     "prettier/prettier": [
       "error",
       {
-        "trailingComma": "es5",
+        "trailingComma": "all",
         "singleQuote": true,
         "printWidth": 80,
         "tabWidth": 2,
