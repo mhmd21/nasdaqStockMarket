@@ -10,7 +10,7 @@ const redisMiddleware = async (
   await client.connect();
   const url = req.originalUrl.substring(req.originalUrl.lastIndexOf('/') + 1);
   try {
-    const cachedData = await client.get(url);
+    const cachedData = await client.get(url.toLowerCase());
     if (cachedData !== null) {
       res.send(JSON.parse(cachedData));
     } else {

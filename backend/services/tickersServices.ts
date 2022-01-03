@@ -4,6 +4,7 @@ import {
   ITickers,
   restClient,
 } from '@polygon.io/client-js';
+import fetch from 'cross-fetch';
 import config from '../config/config';
 
 const rest = restClient(config.polygon_key);
@@ -23,12 +24,27 @@ const getTickerDetails = async (
 ): Promise<TickerPreviousCloseAndDetails> => {
   const tickerDetails = await rest.reference.tickerDetails(ticker);
   const tickerPreviousClose = await rest.stocks.previousClose(ticker);
-  const previousClose = tickerPreviousClose.results;
-  const neededDetails = {
+  const data = {
     ...tickerDetails,
-    previousClose,
+    ...tickerPreviousClose,
   };
-  return neededDetails;
+  return data;
 };
 
-export default { getAllTickers, getTickerDetails };
+const searchTickers = async (ticker: string): Promise<ITickers> => {
+  const tickers = await rest.reference.tickers({ search: ticker });
+  return tickers;
+};
+
+const getRemainingTickers = async (url: string): Promise<ITickers> => {
+  const nextUrl = `${url}&apikey=${config.polygon_key}`;
+  const response = await fetch(nextUrl);
+  return response.json();
+};
+
+export default {
+  getAllTickers,
+  getTickerDetails,
+  searchTickers,
+  getRemainingTickers,
+};
