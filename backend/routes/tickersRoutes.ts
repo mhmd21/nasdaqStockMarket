@@ -6,13 +6,15 @@ const router = express.Router();
 
 router.route('/').get([redisMiddleware], tickersController.getAllTickers);
 
-router
-  .route('/remaining')
-  .get([redisMiddleware], tickersController.getRemainingTickers);
+router.route('/remaining').get(tickersController.getRemainingTickers);
 
 router
   .route('/:ticker')
   .get([redisMiddleware], tickersController.getTickerDetails);
+
+router
+  .route('/:ticker/statistics')
+  .get([redisMiddleware], tickersController.getTickerStatistics);
 
 router.route('/search/:ticker').get(tickersController.searchTickers);
 
