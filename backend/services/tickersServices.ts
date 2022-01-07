@@ -58,7 +58,7 @@ const searchTickers = async (ticker: string): Promise<AllTickers> => {
   return tickersData;
 };
 
-const getRemainingTickers = async (url: string): Promise<AllTickers> => {
+const getNextTickers = async (url: string): Promise<AllTickers> => {
   const nextUrl = `${url}&apikey=${config.polygon_key}`;
   const response = await fetch(nextUrl);
   const tickers = await response.json();
@@ -74,6 +74,6 @@ export default {
   getAllTickers,
   getTickerDetails,
   searchTickers,
-  getRemainingTickers,
+  getNextTickers,
   getTickerStatistics,
 };

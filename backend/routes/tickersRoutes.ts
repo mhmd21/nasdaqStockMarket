@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.route('/').get([redisMiddleware], tickersController.getAllTickers);
 
-router.route('/remaining').get(tickersController.getRemainingTickers);
+router.route('/next').post(tickersController.getNextTickers);
 
 router
   .route('/:ticker')

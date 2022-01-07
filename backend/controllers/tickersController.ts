@@ -17,7 +17,8 @@ const getAllTickers = async (req: Request, res: Response) => {
   await client.connect();
   try {
     const tickers = await tickersServices.getAllTickers();
-    await client.set('tickers', JSON.stringify(tickers));
+    await client.set(req.originalUrl.toLowerCase(), JSON.stringify(tickers));
+
     res.status(200).json(tickers);
   } catch (e) {
     res.status(500).json(`${e}`);
@@ -30,7 +31,10 @@ const getTickerDetails = async (req: Request, res: Response) => {
   await client.connect();
   try {
     const tickerDetails = await tickersServices.getTickerDetails(ticker);
-    await client.set(`${ticker}`.toLowerCase(), JSON.stringify(tickerDetails));
+    await client.set(
+      req.originalUrl.toLowerCase(),
+      JSON.stringify(tickerDetails),
+    );
     res.status(200).json(tickerDetails);
   } catch (e) {
     res.status(500).json(`${e}`);
@@ -44,7 +48,7 @@ const getTickerStatistics = async (req: Request, res: Response) => {
   try {
     const tickerStatistics = await tickersServices.getTickerStatistics(ticker);
     await client.set(
-      `${ticker.toLowerCase()}/statistics`,
+      req.originalUrl.toLowerCase(),
       JSON.stringify(tickerStatistics),
     );
     res.status(200).json(tickerStatistics);
@@ -53,10 +57,10 @@ const getTickerStatistics = async (req: Request, res: Response) => {
   }
 };
 
-const getRemainingTickers = async (req: Request, res: Response) => {
+const getNextTickers = async (req: Request, res: Response) => {
   try {
     const { url } = req.body;
-    const remainingTickers = await tickersServices.getRemainingTickers(url);
+    const remainingTickers = await tickersServices.getNextTickers(url);
     res.status(200).json(remainingTickers);
   } catch (e) {
     res.status(500).json(`${e}`);
@@ -67,6 +71,6 @@ export default {
   getAllTickers,
   getTickerDetails,
   searchTickers,
-  getRemainingTickers,
+  getNextTickers,
   getTickerStatistics,
 };
