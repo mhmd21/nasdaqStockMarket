@@ -17,6 +17,7 @@ describe('Stock Screen', () => {
         symbol: 'AAME',
         url: 'http://www.atlam.com',
       };
+      state.currentTicker.isLoading = false;
     });
 
     render(<StockScreen />, {}, overmind);
@@ -28,11 +29,13 @@ describe('Stock Screen', () => {
     const logoInside = screen.getByAltText('logo');
     const nameInside = screen.getByText(name!);
     const urlInside = screen.getByText('Visit Company Website');
-    expect(descriptionInside).toBeInTheDocument();
-    expect(industryInside).toBeInTheDocument();
-    expect(logoInside).toBeInTheDocument();
-    expect(nameInside).toBeInTheDocument();
-    expect(urlInside).toHaveAttribute('href', url);
+    await waitFor(() => {
+      expect(descriptionInside).toBeInTheDocument();
+      expect(industryInside).toBeInTheDocument();
+      expect(logoInside).toBeInTheDocument();
+      expect(nameInside).toBeInTheDocument();
+      expect(urlInside).toHaveAttribute('href', url);
+    });
   });
 
   test('correctly outputs stock statistics', async () => {
@@ -44,6 +47,7 @@ describe('Stock Screen', () => {
         open: 2.94,
         volume: 17401,
       };
+      state.currentTicker.isLoading = false;
     });
 
     render(<StockScreen />, {}, overmind);
@@ -55,16 +59,17 @@ describe('Stock Screen', () => {
     const lowInside = screen.getByText(low!);
     const openInside = screen.getByText(open!);
     const volumeInside = screen.getByText(volume!);
-    expect(closeInside).toBeInTheDocument();
-    expect(highInside).toBeInTheDocument();
-    expect(lowInside).toBeInTheDocument();
-    expect(openInside).toBeInTheDocument();
-    expect(volumeInside).toBeInTheDocument();
+    await waitFor(() => {
+      expect(closeInside).toBeInTheDocument();
+      expect(highInside).toBeInTheDocument();
+      expect(lowInside).toBeInTheDocument();
+      expect(openInside).toBeInTheDocument();
+      expect(volumeInside).toBeInTheDocument();
+    });
   });
 
   test('correctly shows loading icon while loading ticker data ', async () => {
     const overmind = createOvermindMock(config, (state) => {
-      state.isLoading = true;
       state.currentTicker.statistics = {
         close: 2.91,
         high: 3.0899,
@@ -72,24 +77,24 @@ describe('Stock Screen', () => {
         open: 2.94,
         volume: 17401,
       };
+      state.currentTicker.isLoading = true;
     });
 
     render(<StockScreen />, {}, overmind);
 
-    const loadingIconInside = await waitFor(() =>
-      screen.getByTestId('loadingIcon'),
+    await waitFor(() =>
+      expect(screen.getByTestId('loadingIcon')).toBeInTheDocument(),
     );
-    expect(loadingIconInside).toBeInTheDocument();
   });
 
   test('correctly shows error popup  ', async () => {
     const overmind = createOvermindMock(config, (state) => {
       // eslint-disable-next-line no-param-reassign
       state.error = ['Error'];
+      state.currentTicker.isLoading = false;
     });
 
     render(<StockScreen />, {}, overmind);
-    const errorInside = await waitFor(() => screen.getByText('Error'));
-    expect(errorInside).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText('Error')).toBeInTheDocument());
   });
 });
