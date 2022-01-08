@@ -7,10 +7,12 @@ const ErrorAlert: React.FC = () => {
   const state = useAppState();
   return (
     <div>
-      {state.error.map((error: {} | null | undefined) => (
+      {state.error.map((error: {} | null | undefined, index: number) => (
         <Snackbar
           anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
           open={error !== ''}
+          // eslint-disable-next-line react/no-array-index-key
+          key={index}
         >
           <Alert severity="error" sx={{ width: '100%' }}>
             {error}

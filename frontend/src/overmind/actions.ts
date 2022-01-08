@@ -19,7 +19,6 @@ export const getAllTickers = async (context: Context) => {
 };
 
 export const getTickerDetails = async (context: Context, value: string) => {
-  context.state.isLoading = true;
   try {
     context.state.currentTicker.details =
       await context.effects.getTickerDetails(value);
@@ -28,11 +27,9 @@ export const getTickerDetails = async (context: Context, value: string) => {
       `There was a problem getting ticker details: ${error.toString()}`,
     );
   }
-  context.state.isLoading = false;
 };
 
 export const getTickerStatistics = async (context: Context, value: string) => {
-  context.state.isLoading = true;
   try {
     context.state.currentTicker.statistics =
       await context.effects.getTickerStatistics(value);
@@ -41,11 +38,11 @@ export const getTickerStatistics = async (context: Context, value: string) => {
       `There was a problem getting ticker statistics: ${error.toString()}`,
     );
   }
-  context.state.isLoading = false;
+  context.state.currentTicker.isLoading = false;
 };
 
 export const getTicker = async (context: Context, value: string) => {
-  context.actions.getTickerDetails(value);
+  await context.actions.getTickerDetails(value);
   context.actions.getTickerStatistics(value);
 };
 
@@ -90,7 +87,11 @@ export const getNextTickers = async (context: Context) => {
 };
 
 export const cleanTickerData = async (context: Context) => {
-  context.state.currentTicker = { statistics: {}, details: {} };
+  context.state.currentTicker = {
+    statistics: {},
+    details: {},
+    isLoading: true,
+  };
   context.state.error = [];
 };
 

@@ -2,7 +2,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import styled from '@mui/styled-engine';
 
 const OuterBox = styled(`div`)({
-  minHeight: '100vh',
+  minHeight: '95vh',
   display: 'flex',
   justifyContent: 'center',
   alignContent: 'center',

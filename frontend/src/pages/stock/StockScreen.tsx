@@ -40,7 +40,7 @@ const StockScreen: React.FC = () => {
   return (
     <div>
       <Backbutton />
-      {state.isLoading ? (
+      {state.currentTicker.isLoading ? (
         <LoadingIcon />
       ) : (
         <OuterDiv>

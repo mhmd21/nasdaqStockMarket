@@ -10,7 +10,11 @@ type State = {
   isLoading: boolean;
   error: string[];
   tickers: AllTickers;
-  currentTicker: { statistics: TickerStatistics; details: TickerDetails };
+  currentTicker: {
+    statistics: TickerStatistics;
+    details: TickerDetails;
+    isLoading: boolean;
+  };
 };
 
 const state: State = {
@@ -18,7 +22,7 @@ const state: State = {
   searchInput: '',
   isLoading: false,
   tickers: { count: 0, results: [] },
-  currentTicker: { statistics: {}, details: {} },
+  currentTicker: { statistics: {}, details: {}, isLoading: true },
 };
 
 export default state;
