@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import styled from '@mui/styled-engine';
 import SplashScreen from './pages/splash/SplashScreen';
 import ExploreScreen from './pages/explore/ExploreScreen';
-import StockDetails from './pages/stock/StockScreen';
+import StockScreen from './pages/stock/StockScreen';
 
 const ContentWrapper = styled(`div`)({
   minHeight: `100vh`,
@@ -27,7 +27,7 @@ const App: React.FC = () => {
     <ContentWrapper>
       <Routes>
         <Route path="/" element={<ExploreScreen />} />
-        <Route path="/tickers/:ticker" element={<StockDetails />} />
+        <Route path="/tickers/:ticker" element={<StockScreen />} />
       </Routes>
     </ContentWrapper>
   );

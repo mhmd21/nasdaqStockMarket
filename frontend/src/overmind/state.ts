@@ -14,7 +14,7 @@ type State = {
 };
 
 const state: State = {
-  error: [''],
+  error: [],
   searchInput: '',
   isLoading: false,
   tickers: { count: 0, results: [] },

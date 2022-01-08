@@ -14,18 +14,16 @@ export const getAllTickers = async (): Promise<AllTickers> => {
 };
 
 export const getNextTickers = async (url: string): Promise<AllTickers> => {
-  console.log(url);
   const response = await fetch(`http://localhost:5000/tickers/next`, {
     method: 'POST',
     headers: {
-      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(url),
+    body: JSON.stringify({
+      url,
+    }),
   });
-  console.log(response);
   if (!response.ok) {
-    console.log('hi');
     throw new Error(await response.json());
   }
   return response.json();
@@ -35,7 +33,6 @@ export const getTickerDetails = async (
   ticker: string,
 ): Promise<TickerDetails> => {
   const response = await fetch(`http://localhost:5000/tickers/${ticker}`);
-  console.log(response);
   if (!response.ok) {
     throw new Error(await response.json());
   }
