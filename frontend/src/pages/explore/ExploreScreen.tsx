@@ -5,7 +5,18 @@ import Search from './components/Search';
 import { useActions, useAppState } from '../../overmind';
 import ErrorAlert from '../common/ErrorAlert';
 
-const OuterDiv = styled(`div`)({});
+const InnerDiv = styled(`div`)({
+  maxWidth: `75%`,
+  padding: `50px`,
+  margin: `0 auto`,
+});
+
+const SearchBox = styled(`div`)({
+  display: `flex`,
+  alignItems: `center`,
+  justifyContent: `center`,
+  marginBottom: `50px`,
+});
 
 const ExploreScreen: React.FC = () => {
   const actions = useActions();
@@ -18,11 +29,13 @@ const ExploreScreen: React.FC = () => {
   );
 
   return (
-    <OuterDiv>
-      <Search />
+    <InnerDiv>
+      <SearchBox>
+        <Search />
+      </SearchBox>
       <StockList />
       {state.error && <ErrorAlert />}
-    </OuterDiv>
+    </InnerDiv>
   );
 };
 

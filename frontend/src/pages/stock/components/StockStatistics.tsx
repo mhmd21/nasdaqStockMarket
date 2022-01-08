@@ -20,7 +20,7 @@ const StockStatistics: React.FC = () => {
           <b>Statistics</b>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <b>Close:</b>
+          <b>Close: </b>
           {state.currentTicker.statistics.close
             ? state.currentTicker.statistics.close
             : 'No Close Data Available'}
@@ -32,13 +32,13 @@ const StockStatistics: React.FC = () => {
             : 'No Open Data Available'}
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <b> Volume:</b>
+          <b> Volume: </b>
           {state.currentTicker.statistics.volume
             ? state.currentTicker.statistics.volume
             : 'No Volume Data Available'}
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <b> High:</b>
+          <b> High: </b>
           {state.currentTicker.statistics.high
             ? state.currentTicker.statistics.high
             : 'No High Data Available'}

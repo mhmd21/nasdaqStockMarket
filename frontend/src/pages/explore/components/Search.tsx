@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
 import { useActions, useAppState } from '../../../overmind/index';
 
 const Search: React.FC = () => {
@@ -11,7 +13,7 @@ const Search: React.FC = () => {
     if (state.searchInput !== '') {
       const timeout = setTimeout(() => {
         actions.searchTickers(state.searchInput);
-      }, 1500);
+      }, 1000);
 
       return () => {
         clearTimeout(timeout);
@@ -21,6 +23,15 @@ const Search: React.FC = () => {
   return (
     <div>
       <TextField
+        type="search"
+        sx={{ bgcolor: 'white' }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="end">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
         id="searchBar"
         label="Search"
         variant="outlined"
