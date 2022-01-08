@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
+import { useParams } from 'react-router-dom';
 import { useAppState } from '../../../overmind';
 
 const TickerLogo = styled('img')({
@@ -14,6 +15,7 @@ const H1 = styled(`h1`)({
 
 const StockAbout: React.FC = () => {
   const state = useAppState();
+  const { ticker } = useParams();
 
   return (
     <Grid container justifyContent="flex-start" alignItems="center" spacing={2}>
@@ -39,9 +41,7 @@ const StockAbout: React.FC = () => {
             </H1>
           </Grid>
           <Grid item xs={12} md={4}>
-            {state.currentTicker.details.symbol
-              ? state.currentTicker.details.symbol
-              : 'No Stock Symbol Data Available'}
+            {ticker}
           </Grid>
         </Grid>
       </Grid>

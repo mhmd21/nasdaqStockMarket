@@ -21,7 +21,7 @@ const Search: React.FC = () => {
   return (
     <div>
       <TextField
-        id="outlined-basic"
+        id="searchBar"
         label="Search"
         variant="outlined"
         value={state.searchInput}

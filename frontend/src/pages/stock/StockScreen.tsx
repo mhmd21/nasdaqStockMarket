@@ -7,6 +7,7 @@ import StockAbout from './components/StockAbout';
 import { useActions, useAppState } from '../../overmind';
 import Backbutton from './components/Backbutton';
 import LoadingIcon from '../common/LoadingIcon';
+import ErrorAlert from '../common/ErrorAlert';
 
 const OuterDiv = styled(`div`)({
   minHeight: `95vh`,
@@ -21,7 +22,7 @@ const OuterContainer = styled(Paper)(({ theme }) => ({
   maxWidth: '70%',
 }));
 
-const StockDetails: React.FC = () => {
+const StockScreen: React.FC = () => {
   const { ticker } = useParams();
   const state = useAppState();
   const actions = useActions();
@@ -36,20 +37,21 @@ const StockDetails: React.FC = () => {
     };
   }, []);
 
-  if (state.isLoading) {
-    return <LoadingIcon />;
-  }
-
   return (
     <div>
       <Backbutton />
-      <OuterDiv>
-        <OuterContainer>
-          <StockAbout />
-          <StockStatistics />
-        </OuterContainer>
-      </OuterDiv>
+      {state.isLoading ? (
+        <LoadingIcon />
+      ) : (
+        <OuterDiv>
+          <OuterContainer>
+            <StockAbout />
+            <StockStatistics />
+          </OuterContainer>
+        </OuterDiv>
+      )}
+      {state.error && <ErrorAlert />}
     </div>
   );
 };
-export default StockDetails;
+export default StockScreen;

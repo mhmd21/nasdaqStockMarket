@@ -4,7 +4,6 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { useAppState } from '../../../overmind';
 
-
 const StatisticsContainer = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(3),
@@ -21,25 +20,25 @@ const StockStatistics: React.FC = () => {
           <b>Statistics</b>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <b>Close:</b> $
+          <b>Close:</b>
           {state.currentTicker.statistics.close
             ? state.currentTicker.statistics.close
             : 'No Close Data Available'}
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <b> Open: </b> $
+          <b> Open: </b>
           {state.currentTicker.statistics.open
             ? state.currentTicker.statistics.open
             : 'No Open Data Available'}
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <b> Volume:</b>{' '}
+          <b> Volume:</b>
           {state.currentTicker.statistics.volume
             ? state.currentTicker.statistics.volume
             : 'No Volume Data Available'}
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <b> High:</b> $
+          <b> High:</b>
           {state.currentTicker.statistics.high
             ? state.currentTicker.statistics.high
             : 'No High Data Available'}

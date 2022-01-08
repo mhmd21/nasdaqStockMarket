@@ -38,15 +38,19 @@ const StockList: React.FC = () => {
         loader={<h4>Loading more stocks</h4>}
       >
         <Grid container spacing={2}>
-          {state.tickers.results!.map((ticker) => (
+          {state.tickers.results!.map((stock) => (
             <Grid item xs={4}>
-              <Link key={ticker.ticker} to={`/tickers/${ticker.ticker}`}>
+              <Link
+                id={stock.ticker}
+                key={stock.ticker}
+                to={`/tickers/${stock.ticker}`}
+              >
                 <CardContainer>
                   <Typography variant="h5" component="h2">
-                    {ticker.ticker}
+                    {stock.ticker}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {ticker.name}
+                    {stock.name}
                   </Typography>
                 </CardContainer>
               </Link>
