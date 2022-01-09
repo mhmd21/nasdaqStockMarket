@@ -1,7 +1,7 @@
-// eslint-disable-next-line import/no-cycle
+/* eslint-disable import/no-cycle */
+import { pipe, debounce } from 'overmind';
 import { Context } from './index';
 
-// eslint-disable-next-line import/prefer-default-export
 export const onInitializeOvermind = async (context: Context) => {
   context.actions.getAllTickers();
 };
@@ -46,24 +46,28 @@ export const getTicker = async (context: Context, value: string) => {
   context.actions.getTickerStatistics(value);
 };
 
-export const searchTickers = async (context: Context, value: string) => {
-  context.state.isLoading = true;
-  const searchOutput = await context.effects.searchTickers(value);
-  if (!searchOutput.results)
-    context.state.tickers = {
-      count: 0,
-      results: [],
-    };
-  else context.state.tickers = searchOutput;
-  context.state.isLoading = false;
-};
-
-export const setSearchInput = (context: Context, value: string) => {
-  if (value === '') {
-    context.actions.getAllTickers();
-    context.state.searchInput = '';
-  } else context.state.searchInput = value;
-};
+export const search = pipe(
+  (context: Context, value: string) => {
+    context.state.searchInput = value;
+    return value;
+  },
+  debounce(1000),
+  async (context: Context, value: string) => {
+    context.state.isLoading = true;
+    if (value === '') {
+      context.actions.getAllTickers();
+    } else {
+      const searchOutput = await context.effects.searchTickers(value);
+      if (!searchOutput.results)
+        context.state.tickers = {
+          count: 0,
+          results: [],
+        };
+      else context.state.tickers = searchOutput;
+    }
+    context.state.isLoading = false;
+  },
+);
 
 export const getNextTickers = async (context: Context) => {
   try {
