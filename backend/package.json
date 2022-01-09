@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.ts",
-    "lint": "eslint --fix"
+    "start": "node build/index.js",
+    "build": "rimraf build && tsc",
+    "lint": "eslint --fix",
+    "postinstall": "yarn build",
+    "start:dev": "nodemon index.ts"
   },
   "keywords": [],
   "author": "",

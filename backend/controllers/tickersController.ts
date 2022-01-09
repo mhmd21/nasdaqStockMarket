@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
-import * as redis from 'redis';
 import tickersServices from '../services/tickersServices';
+import redisConnection from '../util/redisConnection';
+
+const redisClient = redisConnection.client;
 
 const searchTickers = async (req: Request, res: Response) => {
   const { ticker } = req.params;
@@ -13,11 +15,13 @@ const searchTickers = async (req: Request, res: Response) => {
 };
 
 const getAllTickers = async (req: Request, res: Response) => {
-  const client = redis.createClient();
-  await client.connect();
   try {
     const tickers = await tickersServices.getAllTickers();
-    await client.set(req.originalUrl.toLowerCase(), JSON.stringify(tickers));
+
+    await redisClient.set(
+      req.originalUrl.toLowerCase(),
+      JSON.stringify(tickers),
+    );
 
     res.status(200).json(tickers);
   } catch (e) {
@@ -27,11 +31,10 @@ const getAllTickers = async (req: Request, res: Response) => {
 
 const getTickerDetails = async (req: Request, res: Response) => {
   const { ticker } = req.params;
-  const client = redis.createClient();
-  await client.connect();
   try {
     const tickerDetails = await tickersServices.getTickerDetails(ticker);
-    await client.set(
+
+    await redisClient.set(
       req.originalUrl.toLowerCase(),
       JSON.stringify(tickerDetails),
     );
@@ -43,11 +46,9 @@ const getTickerDetails = async (req: Request, res: Response) => {
 
 const getTickerStatistics = async (req: Request, res: Response) => {
   const { ticker } = req.params;
-  const client = redis.createClient();
-  await client.connect();
   try {
     const tickerStatistics = await tickersServices.getTickerStatistics(ticker);
-    await client.set(
+    await redisClient.set(
       req.originalUrl.toLowerCase(),
       JSON.stringify(tickerStatistics),
     );
