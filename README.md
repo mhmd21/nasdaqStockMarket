@@ -1,7 +1,7 @@
 # nasdaqStockMarket
 
-This app shows all the stocks listed in NASDAQ exchange with their ticker, name, and details.
-
+This app shows all the stocks listed in NASDAQ exchange with their ticker, name, and details. <br>
+nasdaqStockMarket is deployed [here](https://nasdaqthndr.herokuapp.com/).
 ## Quick Start
 
 Clone the repository and install the dependencies.
