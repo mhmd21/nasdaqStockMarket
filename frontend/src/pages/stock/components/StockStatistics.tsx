@@ -4,7 +4,8 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { useAppState } from '../../../overmind';
 
-const StatisticsContainer = styled(Paper)(({ theme }) => ({
+// eslint-disable-next-line react/jsx-props-no-spreading
+const StatisticsContainer = styled((props) => <Paper {...props} />)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(3),
   marginTop: '20px',

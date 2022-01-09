@@ -8,7 +8,8 @@ import Grid from '@mui/material/Grid';
 import { useActions, useAppState } from '../../../overmind/index';
 import LoadingIcon from '../../common/LoadingIcon';
 
-const CardContainer = styled(Paper)(({ theme }) => ({
+// eslint-disable-next-line react/jsx-props-no-spreading
+const CardContainer = styled((props) => <Paper {...props} />)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(3),
   textAlign: 'center',

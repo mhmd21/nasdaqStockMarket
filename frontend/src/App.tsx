@@ -1,7 +1,6 @@
-import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import styled from '@mui/styled-engine';
+import React, { useEffect, useState } from 'react';
+import { styled } from '@mui/material/styles';
 import SplashScreen from './pages/splash/SplashScreen';
 import ExploreScreen from './pages/explore/ExploreScreen';
 import StockScreen from './pages/stock/StockScreen';

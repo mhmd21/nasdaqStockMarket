@@ -3,7 +3,7 @@ import {
   AllTickers,
   TickerDetails,
   // eslint-disable-next-line import/no-relative-packages
-} from '../../../backend/types/polygonTypes';
+} from '../types/polygonTypes';
 
 type State = {
   searchInput: string;

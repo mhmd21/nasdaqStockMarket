@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import React from 'react';
 import { createOvermindMock } from 'overmind';
 import '@testing-library/jest-dom';
 import { render, screen, waitFor } from '../../../utils/test-utils';

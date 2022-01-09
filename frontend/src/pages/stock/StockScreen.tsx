@@ -16,7 +16,8 @@ const OuterDiv = styled(`div`)({
   justifyContent: `center`,
 });
 
-const OuterContainer = styled(Paper)(({ theme }) => ({
+// eslint-disable-next-line react/jsx-props-no-spreading
+const OuterContainer = styled((props) => <Paper {...props} />)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(5),
   maxWidth: '70%',

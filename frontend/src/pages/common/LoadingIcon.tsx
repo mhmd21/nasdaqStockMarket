@@ -1,5 +1,6 @@
 import CircularProgress from '@mui/material/CircularProgress';
-import styled from '@mui/styled-engine';
+import { styled } from '@mui/material/styles';
+import React from 'react';
 
 const LoadingContainer = styled(`div`)({
   position: 'fixed',
