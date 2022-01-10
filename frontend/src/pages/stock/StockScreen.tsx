@@ -10,7 +10,7 @@ import LoadingIcon from '../common/LoadingIcon';
 import ErrorAlert from '../common/ErrorAlert';
 
 const OuterDiv = styled(`div`)({
-  minHeight: `95vh`,
+  minHeight: `90vh`,
   display: `flex`,
   alignItems: `center`,
   justifyContent: `center`,
@@ -21,6 +21,12 @@ const OuterContainer = styled((props) => <Paper {...props} />)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(5),
   maxWidth: '70%',
+  [theme.breakpoints.down('md')]: {
+    textAlign: `center`,
+  },
+  [theme.breakpoints.up('sm')]: {
+    textAlign: `center`,
+  },
 }));
 
 const StockScreen: React.FC = () => {

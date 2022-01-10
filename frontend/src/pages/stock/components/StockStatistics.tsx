@@ -5,18 +5,30 @@ import Paper from '@mui/material/Paper';
 import { useAppState } from '../../../overmind';
 
 // eslint-disable-next-line react/jsx-props-no-spreading
-const StatisticsContainer = styled((props) => <Paper {...props} />)(({ theme }) => ({
+const StatisticsContainer = styled((props) => <Paper {...props} />)(
+  ({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(3),
+    marginTop: '20px',
+  }),
+);
+
+// eslint-disable-next-line react/jsx-props-no-spreading
+const GridContainer = styled((props) => <Grid {...props} />)(({ theme }) => ({
   ...theme.typography.body2,
-  padding: theme.spacing(3),
-  marginTop: '20px',
-  textAlign: 'left',
+  [theme.breakpoints.down('sm')]: {
+    textAlign: `center`,
+  },
+  [theme.breakpoints.up('md')]: {
+    textAlign: `left`,
+  },
 }));
 
 const StockStatistics: React.FC = () => {
   const state = useAppState();
   return (
     <StatisticsContainer>
-      <Grid container spacing={2}>
+      <GridContainer container spacing={2}>
         <Grid item xs={12} md={12}>
           <b>Statistics</b>
         </Grid>
@@ -50,7 +62,7 @@ const StockStatistics: React.FC = () => {
             ? state.currentTicker.statistics.low
             : 'No Low Data Available'}
         </Grid>
-      </Grid>
+      </GridContainer>
     </StatisticsContainer>
   );
 };

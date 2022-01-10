@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';
 
+// eslint-disable-next-line react/jsx-props-no-spreading
+
 const Backbutton: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -17,7 +19,7 @@ const Backbutton: React.FC = () => {
   };
   return (
     <IconButton onClick={handleClick}>
-      <ArrowBackIcon />
+      <ArrowBackIcon fontSize="large" />
     </IconButton>
   );
 };

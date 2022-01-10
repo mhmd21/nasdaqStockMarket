@@ -2,12 +2,10 @@ import React from 'react';
 import { styled } from '@mui/material/styles';
 
 const LogoContainer = styled(`div`)({
-  height: `100vh`,
-  width: `100%`,
-  display: `flex`,
-  alignItems: `center`,
-  justifyContent: `center`,
-  flexDirection: `column`,
+  position: 'fixed',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
 });
 
 const CreatedByContainer = styled(`div`)({

@@ -13,10 +13,12 @@ const CardContainer = styled((props) => <Paper {...props} />)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(3),
   textAlign: 'center',
-  color: 'black',
-  textDecoration: 'none',
 }));
 
+const LinkContainer = styled(Link)({
+  color: 'black',
+  textDecoration: 'none',
+});
 const StockList: React.FC = () => {
   const actions = useActions();
   const state = useAppState();
@@ -35,7 +37,7 @@ const StockList: React.FC = () => {
       <Grid container spacing={3}>
         {state.tickers.results!.map((stock) => (
           <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Link
+            <LinkContainer
               id={stock.ticker}
               key={stock.ticker}
               to={`/tickers/${stock.ticker}`}
@@ -48,7 +50,7 @@ const StockList: React.FC = () => {
                   {stock.name}
                 </Typography>
               </CardContainer>
-            </Link>
+            </LinkContainer>
           </Grid>
         ))}
       </Grid>

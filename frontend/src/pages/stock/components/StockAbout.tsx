@@ -13,13 +13,29 @@ const H1 = styled(`h1`)({
   margin: `0`,
 });
 
+// eslint-disable-next-line react/jsx-props-no-spreading
+const GridContainer = styled((props) => <Grid {...props} />)(({ theme }) => ({
+  ...theme.typography.body2,
+  [theme.breakpoints.down('sm')]: {
+    textAlign: `center`,
+  },
+  [theme.breakpoints.up('md')]: {
+    textAlign: `left`,
+  },
+}));
+
 const StockAbout: React.FC = () => {
   const state = useAppState();
   const { ticker } = useParams();
 
   return (
-    <Grid container justifyContent="flex-start" alignItems="center" spacing={2}>
-      <Grid item sx={{ textAlign: 'center' }} xs={12} md={1}>
+    <GridContainer
+      container
+      justifyContent="flex-start"
+      alignItems="center"
+      spacing={2}
+    >
+      <Grid item xs={12} md={1}>
         {state.currentTicker.details.logo ? (
           <TickerLogo
             src={state.currentTicker.details.logo}
@@ -31,18 +47,16 @@ const StockAbout: React.FC = () => {
           'No Logo Available'
         )}
       </Grid>
-      <Grid item xs={8} md={10}>
-        <Grid container justifyContent="flex-start" alignItems="center">
-          <Grid item xs={12} md={10}>
-            <H1>
-              {state.currentTicker.details.name
-                ? state.currentTicker.details.name
-                : 'No Ticker Name Data Available'}
-            </H1>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            {ticker}
-          </Grid>
+      <Grid item xs={12} md={10}>
+        <Grid item xs={12} md={10}>
+          <H1>
+            {state.currentTicker.details.name
+              ? state.currentTicker.details.name
+              : 'No Ticker Name Data Available'}
+          </H1>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          {ticker}
         </Grid>
       </Grid>
       <Grid item xs={12} md={4}>
@@ -63,7 +77,7 @@ const StockAbout: React.FC = () => {
           ? state.currentTicker.details.description
           : 'No Ticker Descripition Available'}
       </Grid>
-    </Grid>
+    </GridContainer>
   );
 };
 export default StockAbout;

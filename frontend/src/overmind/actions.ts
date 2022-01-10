@@ -51,11 +51,11 @@ export const search = pipe(
     context.state.searchInput = value;
     return value;
   },
-  debounce(1000),
+  debounce(800),
   async (context: Context, value: string) => {
     context.state.isLoading = true;
     if (value === '') {
-      context.actions.getAllTickers();
+      context.state.tickers = await context.effects.getAllTickers();
     } else {
       const searchOutput = await context.effects.searchTickers(value);
       if (!searchOutput.results)
